@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { useState, useEffect } from 'react';
 
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom';
 
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
@@ -24,39 +24,41 @@ firebase.initializeApp({
 const firestore = firebase.firestore();
 
 const Answers = () => {
-
   const [searchParams, setSearchParams] = useSearchParams();
 
   const id = Number(searchParams.get('id'));
 
-  //const [answers, setAnswers] = useState<any | null>(null);
+  const [answers, setAnswers] = useState<any | null>(null);
 
   const keysRef = firestore.collection('keys');
   const query = keysRef;
 
   const [keys] = useCollectionData(query);
 
-  //useEffect(() => {
+  useEffect(() => {
     //Runs on every render
-    //if (keys != null) {
-      //setAnswers(getAnswers);
-   // }
- // }, [keys]);
-
+    if (keys != null) {
+      getAnswers();
+    }
+  }, [keys]);
 
   function getAnswers() {
     if (keys.find((x) => x.id === id)) {
-      return (
+      let answerKey = keys.find((x) => x.id === id);
+
+      setAnswers(
+        answerKey.answers.results.map((item, index) => {
+          return <p key={index}>{atob(item.question)}</p>;
+        })
+      );
+    } else {
+      setAnswers(
         <div>
-          <p id="answers">{keys.find((x) => x.id === id).answers}</p>
+          <p id="answers">Session ID expired or invalid.</p>
         </div>
       );
     }
-    return (
-      <div>
-        <p id="answers">Answers Expired.</p>
-      </div>
-    );
+    console.log(answers);
   }
 
   return (
