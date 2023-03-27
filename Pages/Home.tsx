@@ -209,9 +209,9 @@ return (
             <br/>
             <label>Type</label>
             <br/>
-            <select onChange={updateType}>
+            <select defaultValue='Multiple Choice' onChange={updateType}>
                 <option>Any Type</option>
-                <option selected>Multiple Choice</option>
+                <option>Multiple Choice</option>
                 <option>True/False</option>
             </select>
             <br/>
