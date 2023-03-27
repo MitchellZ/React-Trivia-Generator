@@ -58,7 +58,6 @@ const Answers = () => {
         </div>
       );
     }
-    console.log(answers);
   }
 
   return (
