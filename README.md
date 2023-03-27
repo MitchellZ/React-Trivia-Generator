@@ -1,3 +1,3 @@
-# react-trivia-generator
+# React-Trivia-Generator
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/react-ts-erennb)
+See it in action at https://react-ts-erennb.stackblitz.io
