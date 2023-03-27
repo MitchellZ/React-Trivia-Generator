@@ -4,7 +4,22 @@ import { Link } from 'react-router-dom';
 
 import { useState} from 'react';
 
-import { useSearchParams } from 'react-router-dom'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+
+firebase.initializeApp({
+    apiKey: 'AIzaSyCFy8u7W1OT1-sRF5aTI4Qn3Z7k3_eJx3s',
+    authDomain: 'react-trivia-generator.firebaseapp.com',
+    projectId: 'react-trivia-generator',
+    storageBucket: 'react-trivia-generator.appspot.com',
+    messagingSenderId: '425929609914',
+    appId: '1:425929609914:web:fe481e73d643a82c0aa883',
+    measurementId: 'G-FWGCCGGD6N',
+  });
+
+const firestore = firebase.firestore();
 
 let amount = '10';
 let difficulty = '';
@@ -17,7 +32,6 @@ const Home = () => {
   function carousel() {
       var i;
       var x = document.querySelectorAll<HTMLElement>('.slide');
-      console.log(x)
       numSlides = x.length;
       for (i = 0; i < x.length; i++) {
           x[i].style.display = 'none';
@@ -152,6 +166,11 @@ const Home = () => {
               '&encode=base64'; 
   };
 
+  const keysRef = firestore.collection('keys');
+  const query = keysRef;
+
+  const [keys] = useCollectionData(query);
+
   const pullJson = (event) => {
       event.preventDefault();
       
@@ -167,7 +186,12 @@ const Home = () => {
                 </div>
               )
           });
-          
+          //Add answer key to database with id 1 greater than the highest key
+          keysRef.add({
+              id: Math.max(...keys.map(x => x.id)) +1,
+              answers: responseData
+            });
+
           setShowPosts(displayData);
       });
   }

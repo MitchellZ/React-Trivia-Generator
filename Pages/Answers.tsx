@@ -43,6 +43,7 @@ const Answers = () => {
   }, [keys]);
 
   function getAnswers() {
+
     if (keys.find((x) => x.id === id)) {
       let answerKey = keys.find((x) => x.id === id);
 
