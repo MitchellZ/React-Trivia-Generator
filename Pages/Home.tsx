@@ -174,7 +174,7 @@ const Home = () => {
         });
 
         setAnswerKeyLink(
-          'https://react-ts-erennb.stackblitz.io/Answers?id=' + newId
+          'https://react-trivia-generator.stackblitz.io/Answers?id=' + newId
         );
 
         setShowPosts(displayData);
