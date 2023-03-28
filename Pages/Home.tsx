@@ -182,12 +182,17 @@ const Home = () => {
   };
 
   const generateHandle = (event) => {
+    document.querySelector<HTMLElement>('.slides').style.opacity = "0.85";
+    setTimeout( () => {
     slideIndex = 0;
     setTimeout(carousel);
     pullJson(event);
+    document.querySelector<HTMLElement>('.slides').style.opacity = "1";
     document.querySelector<HTMLElement>('.slides').style.display = '';
     document.querySelector<HTMLElement>('.keyLink').style.display = '';
     document.querySelector<HTMLElement>('.keyLabel').style.display = '';
+    }, 50
+    )
   };
 
   const copyLink = () => {
