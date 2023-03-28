@@ -43,63 +43,53 @@ const Answers = () => {
   }, [keys]);
 
   function getAnswers() {
-    if (keys.find((x) => x.id === id)) {
-      let answerKey = keys.find((x) => x.id === id);
-
-      let incorrect1 = <div/>;
-      let incorrect2 = <div/>;
-      let incorrect3 = <div/>;
-
-      setAnswers(
-        answerKey.answers.results.map((item, index) => {
-          incorrect1 = (
-            <p key={20 * (index + 1)} className="incorrect">
-              {atob(item.incorrect_answers[0])}
-            </p>
-          );
-
-          if (item.incorrect_answers.length >= 2) {
-            incorrect2 = (
-              <p key={30 * (index + 1)} className="incorrect">
-                {atob(item.incorrect_answers[1])}
-              </p>
-            );
-          }
-          if (item.incorrect_answers.length >= 3) {
-            incorrect3 = (
-              <p key={40 * (index + 1)} className="incorrect">
-                {atob(item.incorrect_answers[2])}
-              </p>
-            );
-          }
-          return (
-            <div key={50 * (index + 1)}>
-              <p key={index} className="question">
-                {atob(item.question)}
-              </p>
-              <br />
-              <p key={10 * (index + 1)} className="correct">
-                {atob(item.correct_answer)}
-              </p>
-              <br />
-              {incorrect1}
-              <br />
-              {incorrect2}
-              <br />
-              {incorrect3}
-              <div key={60 * (index + 1)} id="spacer" />
-            </div>
-          );
-        })
-      );
-    } else {
+    const answerKey = keys.find(x => x.id === id);
+  
+    // Check if the answer key exists for the given session ID
+    if (!answerKey) {
       setAnswers(
         <div>
           <p id="answers">Session ID expired or invalid.</p>
         </div>
       );
+      return;
     }
+  
+    // Map over the results and create an element for each question and answer
+    setAnswers(
+      answerKey.answers.results.map((item, index) => {
+        let incorrectAnswers = null;
+  
+        // If the question type is not "boolean", render the incorrect answers
+        if (atob(item.type) !== "boolean") {
+          incorrectAnswers = item.incorrect_answers.map((answer, i) => (
+            <div key={`incorrect_div_${i}`}>
+            <p key={`incorrect_${i}`} className="incorrect">
+              {atob(answer)}
+            </p>
+            <br />
+            </div>
+          ));
+        }
+  
+        return (
+          <div key={`result_${index}`}>
+            <p key={`question_${index}`} className="question">
+              {atob(item.question)}
+            </p>
+            <br />
+            <p key={`correct_${index}`} className="correct">
+              {atob(item.correct_answer)}
+            </p>
+            <br />
+            {incorrectAnswers}
+            <div key={`spacer_${index}`} id="spacer" />
+          </div>
+        );
+      })
+    );
   }
+  
 
   return (
     <div>
@@ -120,9 +110,11 @@ const Answers = () => {
       <div className="main_body">
         <div className="welcome">
           <h1>ANSWER KEY</h1>
-          <br />
-          {answers}
         </div>
+        <div className='answer_key'>
+        <br />
+          {answers}
+          </div>
       </div>
       <footer>
         <ul>

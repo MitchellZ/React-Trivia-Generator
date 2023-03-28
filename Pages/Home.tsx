@@ -199,9 +199,6 @@ const Home = () => {
 
   document.addEventListener('mousedown', () => (drag = false));
   document.addEventListener('mousemove', () => (drag = true));
-  document.addEventListener('mouseup', () =>
-    console.log(drag ? 'drag' : 'click')
-  );
 
   const openLink = () => {
     if (!drag) window.open(answerKeyLink, '_blank');
