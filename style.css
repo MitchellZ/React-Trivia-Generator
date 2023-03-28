@@ -357,6 +357,10 @@ footer li {
   outline: none;
 }
 
+.keyLink input:hover {
+  cursor: pointer;
+}
+
 #copyButton {
   background-color: #0fb3eb;
   width: 42px;

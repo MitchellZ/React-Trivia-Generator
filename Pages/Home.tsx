@@ -191,8 +191,20 @@ const Home = () => {
   };
 
   const copyLink = () => {
-   // Copy the text inside the text field
-  navigator.clipboard.writeText(answerKeyLink);
+    // Copy the text inside the text field
+    navigator.clipboard.writeText(answerKeyLink);
+  };
+
+  let drag = false;
+
+  document.addEventListener('mousedown', () => (drag = false));
+  document.addEventListener('mousemove', () => (drag = true));
+  document.addEventListener('mouseup', () =>
+    console.log(drag ? 'drag' : 'click')
+  );
+
+  const openLink = () => {
+    if (!drag) window.open(answerKeyLink, '_blank');
   };
 
   return (
@@ -275,7 +287,13 @@ const Home = () => {
             </label>
             <br />
             <div className="keyLink" style={{ display: 'none' }}>
-              <input id='linkText' type="text" value={answerKeyLink} readOnly />{' '}
+              <input
+                id="linkText"
+                type="text"
+                value={answerKeyLink}
+                onClick={openLink}
+                readOnly
+              />{' '}
               <div id="copyButton" onClick={copyLink}>
                 <span className="material-symbols-outlined">content_copy</span>
               </div>
