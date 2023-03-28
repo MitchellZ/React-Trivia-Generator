@@ -241,7 +241,7 @@ const Home = () => {
             type="number"
             min="1"
             max="50"
-            value="10"
+            value={number}
           />
           <br />
           <label>Difficulty</label>
