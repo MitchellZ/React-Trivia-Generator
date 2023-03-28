@@ -392,3 +392,14 @@ footer li {
     font-size: xx-large;
   }
 }
+.question{
+  text-align: center;
+}
+
+.correct{
+  color: green;
+}
+
+.incorrect{
+  color: red;
+}
