@@ -75,7 +75,7 @@ const Answers = () => {
         return (
           <div key={`result_${index}`}>
             <p key={`question_${index}`} className="question">
-              {atob(item.question)}
+              {index+1 + '. ' + atob(item.question)}
             </p>
             <br />
             <p key={`correct_${index}`} className="correct">
