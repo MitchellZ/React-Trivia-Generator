@@ -102,8 +102,6 @@ p {
 
   .parameters_form select {
     padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 24px;
     width: 45%;
     background-color: white;
     border: 3px solid #0fb3eb;
@@ -113,12 +111,19 @@ p {
   .parameters_form input {
     box-sizing: border-box;
     padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 24px;
     width: 45%;
     background-color: white;
     border: 3px solid #0fb3eb;
     border-radius: 10px;
+  }
+
+  .parameters_form input.invalid{
+    border: 3px solid red;
+  }
+
+  .input_item{
+    margin-top: 8px;
+    margin-bottom: 24px;
   }
 }
 
@@ -135,8 +140,6 @@ p {
 
   .parameters_form select {
     padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 24px;
     width: 65%;
     background-color: white;
     border: 3px solid #0fb3eb;
@@ -146,12 +149,19 @@ p {
   .parameters_form input {
     box-sizing: border-box;
     padding: 10px;
-    margin-top: 8px;
-    margin-bottom: 24px;
     width: 65%;
     background-color: white;
     border: 3px solid #0fb3eb;
     border-radius: 10px;
+  }
+
+  .parameters_form input.invalid{
+    border: 3px solid red;
+  }
+
+  .input_item{
+    margin-top: 8px;
+    margin-bottom: 24px;
   }
 }
 
@@ -193,6 +203,18 @@ label {
   background-color: #0d8fbb;
   color: white;
   border: 3px solid #0d8fbb;
+}
+
+input:focus{
+  outline: none;
+}
+
+#form_error{
+  color: red;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 11pt;
+  margin-top: 8px;
 }
 
 #spacer {

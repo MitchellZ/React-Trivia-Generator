@@ -95,8 +95,16 @@ const Home = () => {
   const updateAmount = (event) => {
     let newAmount = event.target.value;
     setNum(newAmount);
-    if (newAmount < 1 || newAmount > 50) amount = '10';
-    else amount = newAmount;
+    if (newAmount < 1 || newAmount > 50) {
+      event.target.classList.add('invalid');
+      document.querySelector<HTMLElement>('#form_error').style.display = ''
+      amount = '10';
+    }
+    else{
+      event.target.classList.remove('invalid');
+      document.querySelector<HTMLElement>('#form_error').style.display = 'none';
+      amount = newAmount;
+    }
 
     updateUrl();
   };
@@ -236,6 +244,7 @@ const Home = () => {
           <br />
           <label>Number of Questions</label>
           <br />
+          <div className='input_item'>
           <input
             onChange={updateAmount}
             type="number"
@@ -243,23 +252,29 @@ const Home = () => {
             max="50"
             value={number}
           />
+          <p id='form_error' style={{display: 'none'}}>Must be between 1-50.</p>
+          </div>
           <br />
           <label>Difficulty</label>
           <br />
+          <div className='input_item'>
           <select onChange={updateDifficulty}>
             <option>Any Difficulty</option>
             <option>Easy</option>
             <option>Medium</option>
             <option>Hard</option>
           </select>
+          </div>
           <br />
           <label>Type</label>
           <br />
+          <div className='input_item'>
           <select defaultValue="Multiple Choice" onChange={updateType}>
             <option>Any Type</option>
             <option>Multiple Choice</option>
             <option>True/False</option>
           </select>
+          </div>
           <br />
           <button type="button" onClick={generateHandle}>
             Generate
