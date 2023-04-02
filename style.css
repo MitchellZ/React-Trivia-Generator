@@ -205,6 +205,10 @@ label {
   border: 3px solid #0d8fbb;
 }
 
+input {
+  scroll-margin-top: 100px;
+}
+
 input:focus{
   outline: none;
 }

@@ -97,10 +97,9 @@ const Home = () => {
     setNum(newAmount);
     if (newAmount < 1 || newAmount > 50) {
       event.target.classList.add('invalid');
-      document.querySelector<HTMLElement>('#form_error').style.display = ''
+      document.querySelector<HTMLElement>('#form_error').style.display = '';
       amount = '10';
-    }
-    else{
+    } else {
       event.target.classList.remove('invalid');
       document.querySelector<HTMLElement>('#form_error').style.display = 'none';
       amount = newAmount;
@@ -189,18 +188,29 @@ const Home = () => {
       });
   };
 
+  const validateForm = () => {
+    if (Number(document.querySelector('input').value) >= 1 && Number(document.querySelector('input').value) <= 50){
+      return true;
+    }
+    else {
+      document.querySelector('input').scrollIntoView();
+      return false;
+    }
+  }
+
   const generateHandle = (event) => {
-    document.querySelector<HTMLElement>('.slides').style.opacity = "0.85";
-    setTimeout( () => {
-    slideIndex = 0;
-    setTimeout(carousel);
-    pullJson(event);
-    document.querySelector<HTMLElement>('.slides').style.opacity = "1";
-    document.querySelector<HTMLElement>('.slides').style.display = '';
-    document.querySelector<HTMLElement>('.keyLink').style.display = '';
-    document.querySelector<HTMLElement>('.keyLabel').style.display = '';
-    }, 50
-    )
+    if (validateForm()) {
+      document.querySelector<HTMLElement>('.slides').style.opacity = '0.85';
+      setTimeout(() => {
+        slideIndex = 0;
+        setTimeout(carousel);
+        pullJson(event);
+        document.querySelector<HTMLElement>('.slides').style.opacity = '1';
+        document.querySelector<HTMLElement>('.slides').style.display = '';
+        document.querySelector<HTMLElement>('.keyLink').style.display = '';
+        document.querySelector<HTMLElement>('.keyLabel').style.display = '';
+      }, 50);
+    }
   };
 
   const copyLink = () => {
@@ -244,36 +254,38 @@ const Home = () => {
           <br />
           <label>Number of Questions</label>
           <br />
-          <div className='input_item'>
-          <input
-            onChange={updateAmount}
-            type="number"
-            min="1"
-            max="50"
-            value={number}
-          />
-          <p id='form_error' style={{display: 'none'}}>Must be between 1-50.</p>
+          <div className="input_item">
+            <input
+              onChange={updateAmount}
+              type="number"
+              min="1"
+              max="50"
+              value={number}
+            />
+            <p id="form_error" style={{ display: 'none' }}>
+              Must be between 1-50.
+            </p>
           </div>
           <br />
           <label>Difficulty</label>
           <br />
-          <div className='input_item'>
-          <select onChange={updateDifficulty}>
-            <option>Any Difficulty</option>
-            <option>Easy</option>
-            <option>Medium</option>
-            <option>Hard</option>
-          </select>
+          <div className="input_item">
+            <select onChange={updateDifficulty}>
+              <option>Any Difficulty</option>
+              <option>Easy</option>
+              <option>Medium</option>
+              <option>Hard</option>
+            </select>
           </div>
           <br />
           <label>Type</label>
           <br />
-          <div className='input_item'>
-          <select defaultValue="Multiple Choice" onChange={updateType}>
-            <option>Any Type</option>
-            <option>Multiple Choice</option>
-            <option>True/False</option>
-          </select>
+          <div className="input_item">
+            <select defaultValue="Multiple Choice" onChange={updateType}>
+              <option>Any Type</option>
+              <option>Multiple Choice</option>
+              <option>True/False</option>
+            </select>
           </div>
           <br />
           <button type="button" onClick={generateHandle}>
