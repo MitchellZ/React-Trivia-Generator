@@ -50,15 +50,7 @@ const Home = () => {
     slideIndex -= 1;
     var elements = document.getElementsByClassName('slides');
     var elem = elements[0];
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen();
-    } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
-    }
+    elem.requestFullscreen();
   }
 
   let lastKey = 'none';
@@ -146,7 +138,7 @@ const Home = () => {
     difficulty +
     '&type=' +
     type +
-    '&encode=base64';
+    '&encode=url3986';
 
   // Updates the URL for calling OpenTriviaDatabase with the latest variable values
   // This is called by the functions that update those variables
@@ -158,7 +150,7 @@ const Home = () => {
       difficulty +
       '&type=' +
       type +
-      '&encode=base64';
+      '&encode=url3986';
   };
 
   // Firestore variables
@@ -179,7 +171,7 @@ const Home = () => {
           return (
             <div className="slide" key={index} style={{ display: 'none' }}>
               <p id="slideText">
-                {index + 1}. {atob(item.question)}
+                {index + 1}. {decodeURIComponent(item.question)}
               </p>
             </div>
           );

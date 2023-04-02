@@ -64,11 +64,11 @@ const Answers = () => {
         let incorrectAnswers = null;
   
         // If the question type is not "boolean", render the incorrect answers
-        if (atob(item.type) !== "boolean") {
+        if (decodeURIComponent(item.type) !== "boolean") {
           incorrectAnswers = item.incorrect_answers.map((answer, i) => (
             <div key={`incorrect_div_${i}`}>
             <p key={`incorrect_${i}`} className="incorrect">
-              {atob(answer)}
+              {decodeURIComponent(answer)}
             </p>
             <br />
             </div>
@@ -79,11 +79,11 @@ const Answers = () => {
         return (
           <div key={`result_${index}`}>
             <p key={`question_${index}`} className="question">
-              {index+1 + '. ' + atob(item.question)}
+              {index+1 + '. ' + decodeURIComponent(item.question)}
             </p>
             <br />
             <p key={`correct_${index}`} className="correct">
-              {atob(item.correct_answer)}
+              {decodeURIComponent(item.correct_answer)}
             </p>
             <br />
             {incorrectAnswers}
