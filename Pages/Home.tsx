@@ -1,9 +1,9 @@
 import * as React from 'react';
 import '../style.css';
-import { Link } from 'react-router-dom';
 
 import { useState } from 'react';
 
+// Initializing Firebase
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
@@ -27,7 +27,10 @@ let type = 'multiple';
 var slideIndex = 0;
 var numSlides = 0;
 
+// Defining the Home component
 const Home = () => {
+
+  // This function handles the Trivia Slideshow
   function carousel() {
     var i;
     var x = document.querySelectorAll<HTMLElement>('.slide');
@@ -42,6 +45,7 @@ const Home = () => {
     x[slideIndex - 1].style.display = '';
   }
 
+  // This function handles making the Trivia slides fullscreen
   function goFullscreen() {
     slideIndex -= 1;
     var elements = document.getElementsByClassName('slides');
@@ -72,6 +76,7 @@ const Home = () => {
     }
   };
 
+  // This function allows the user to change slides with the mouse or arrow keys
   function changeSlides(event) {
     const localX = event.clientX - event.target.offsetLeft;
     if (localX >= 30) carousel();
@@ -133,6 +138,7 @@ const Home = () => {
   const [showPosts, setShowPosts] = useState();
   const [answerKeyLink, setAnswerKeyLink] = useState('');
 
+  // Initializes the URL for calling OpenTriviaDatabase
   let apiUrl =
     'https://opentdb.com/api.php?amount=' +
     amount +
@@ -142,6 +148,8 @@ const Home = () => {
     type +
     '&encode=base64';
 
+  // Updates the URL for calling OpenTriviaDatabase with the latest variable values
+  // This is called by the functions that update those variables
   const updateUrl = () => {
     apiUrl =
       'https://opentdb.com/api.php?amount=' +
@@ -153,14 +161,17 @@ const Home = () => {
       '&encode=base64';
   };
 
+  // Firestore variables
   const keysRef = firestore.collection('keys');
   const query = keysRef;
 
   const [keys] = useCollectionData(query);
 
+  // This function uses the OpenTriviaDatabase API to generate trivia slides
   const pullJson = (event) => {
     event.preventDefault();
 
+    // HTTP request to API. Sets displayData to JSX elements representing slides
     fetch(apiUrl)
       .then((response) => response.json())
       .then((responseData) => {
@@ -173,22 +184,26 @@ const Home = () => {
             </div>
           );
         });
-        //Add answer key to database with id 1 greater than the highest key
+        // Add answer key to database with id 1 greater than the highest key (previous id)
         let newId = Math.max(...keys.map((x) => x.id)) + 1;
         keysRef.add({
           id: newId,
           answers: responseData,
         });
 
+        // Update the link to the answer key page with the new ID
         setAnswerKeyLink(
           'https://react-trivia-generator.stackblitz.io/Answers?id=' + newId
         );
-
+        
+        // Set the state to display the newly retrieved data
         setShowPosts(displayData);
       });
   };
 
+  // This function returns true if the form input is valid
   const validateForm = () => {
+    // Checks if the input number is between 1-50 as required by the API
     if (Number(document.querySelector('input').value) >= 1 && Number(document.querySelector('input').value) <= 50){
       return true;
     }
@@ -198,6 +213,7 @@ const Home = () => {
     }
   }
 
+  // Handles click of the "Generate" button
   const generateHandle = (event) => {
     if (validateForm()) {
       document.querySelector<HTMLElement>('.slides').style.opacity = '0.85';
@@ -213,6 +229,7 @@ const Home = () => {
     }
   };
 
+  // This section handles interaction with the Answer Key link
   const copyLink = () => {
     // Copy the text inside the text field
     navigator.clipboard.writeText(answerKeyLink);
@@ -227,6 +244,7 @@ const Home = () => {
     if (!drag) window.open(answerKeyLink, '_blank');
   };
 
+  // Begin HTML Template
   return (
     <div id="container">
       <link

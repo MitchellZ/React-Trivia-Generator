@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 import { useSearchParams } from 'react-router-dom';
 
+// Initializing Firebase
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 
@@ -23,6 +24,7 @@ firebase.initializeApp({
 
 const firestore = firebase.firestore();
 
+// Defining the Answers component
 const Answers = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -36,12 +38,13 @@ const Answers = () => {
   const [keys] = useCollectionData(query);
 
   useEffect(() => {
-    //Runs on every render
+    //Runs on every render, gets answers to display
     if (keys != null) {
       getAnswers();
     }
   }, [keys]);
 
+  // Gets sets answers to answers from Firestore or indicates invalid ID
   function getAnswers() {
     const answerKey = keys.find(x => x.id === id);
   
@@ -72,6 +75,7 @@ const Answers = () => {
           ));
         }
   
+        // Returns JSX elements representing trivia questions and answers
         return (
           <div key={`result_${index}`}>
             <p key={`question_${index}`} className="question">
@@ -90,7 +94,7 @@ const Answers = () => {
     );
   }
   
-
+   // Begin HTML Template
   return (
     <div>
       <div className="nav">

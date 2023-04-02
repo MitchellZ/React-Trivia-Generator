@@ -4,7 +4,9 @@ import {
   Link
 } from "react-router-dom";
 
+// Defining the About component
 const About = () => {
+   // Begin HTML Template
   return (
       <div>
         <div className="nav">
