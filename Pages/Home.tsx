@@ -22,6 +22,7 @@ firebase.initializeApp({
 const firestore = firebase.firestore();
 
 let amount = '10';
+let category = '';
 let difficulty = '';
 let type = 'multiple';
 var slideIndex = 0;
@@ -29,7 +30,6 @@ var numSlides = 0;
 
 // Defining the Home component
 const Home = () => {
-
   // This function handles the Trivia Slideshow
   function carousel() {
     var i;
@@ -89,6 +89,30 @@ const Home = () => {
     }
   }
 
+  // Fetch codes corresponding to categories from OpenTriviaDatabase API
+  let categoryCodes;
+
+  fetch('https://opentdb.com/api_category.php')
+    .then((response) => response.json())
+    .then((data) => {
+      categoryCodes = data.trivia_categories;
+    });
+
+  const updateCategory = (event) => {
+    let newCategory = event.target.value;
+    if (newCategory === 'Any Category') {
+      category = '';
+    } else {
+      //Set category code logic
+      for (let i = 0; i < categoryCodes.length; i++) {
+        if (categoryCodes[i].name == newCategory)
+          category = categoryCodes[i].id;
+      }
+    }
+
+    updateUrl();
+  };
+
   const updateAmount = (event) => {
     let newAmount = event.target.value;
     setNum(newAmount);
@@ -134,6 +158,8 @@ const Home = () => {
   let apiUrl =
     'https://opentdb.com/api.php?amount=' +
     amount +
+    '&category=' +
+    category +
     '&difficulty=' +
     difficulty +
     '&type=' +
@@ -146,6 +172,8 @@ const Home = () => {
     apiUrl =
       'https://opentdb.com/api.php?amount=' +
       amount +
+      '&category=' +
+      category +
       '&difficulty=' +
       difficulty +
       '&type=' +
@@ -187,7 +215,7 @@ const Home = () => {
         setAnswerKeyLink(
           'https://react-trivia-generator.stackblitz.io/Answers?id=' + newId
         );
-        
+
         // Set the state to display the newly retrieved data
         setShowPosts(displayData);
       });
@@ -196,14 +224,16 @@ const Home = () => {
   // This function returns true if the form input is valid
   const validateForm = () => {
     // Checks if the input number is between 1-50 as required by the API
-    if (Number(document.querySelector('input').value) >= 1 && Number(document.querySelector('input').value) <= 50){
+    if (
+      Number(document.querySelector('input').value) >= 1 &&
+      Number(document.querySelector('input').value) <= 50
+    ) {
       return true;
-    }
-    else {
+    } else {
       document.querySelector('input').scrollIntoView();
       return false;
     }
-  }
+  };
 
   // Handles click of the "Generate" button
   const generateHandle = (event) => {
@@ -275,6 +305,38 @@ const Home = () => {
             <p id="form_error" style={{ display: 'none' }}>
               Must be between 1-50.
             </p>
+          </div>
+          <br />
+          <label>Category</label>
+          <br />
+          <div className="input_item">
+            <select onChange={updateCategory}>
+              <option>Any Category</option>
+              <option>General Knowledge</option>
+              <option>Entertainment: Books</option>
+              <option>Entertainment: Film</option>
+              <option>Entertainment: Music</option>
+              <option>Entertainment: Musicals & Theatres</option>
+              <option>Entertainment: Television</option>
+              <option>Entertainment: Video Games</option>
+              <option>Entertainment: Board Games</option>
+              <option>Science & Nature</option>
+              <option>Science: Computers</option>
+              <option>Science: Mathematics</option>
+              <option>Mythology</option>
+              <option>Sports</option>
+              <option>Geography</option>
+              <option>History</option>
+              <option>Politics</option>
+              <option>Art</option>
+              <option>Celebrities</option>
+              <option>Animals</option>
+              <option>Vehicles</option>
+              <option>Entertainment: Comics</option>
+              <option>Science: Gadgets</option>
+              <option>Entertainment: Japanese Anime & Manga</option>
+              <option>Entertainment: Cartoon & Animations</option>
+            </select>
           </div>
           <br />
           <label>Difficulty</label>
