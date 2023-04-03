@@ -221,14 +221,30 @@ const Home = () => {
       });
   };
 
+  const noResults = () => {
+    document.querySelector<HTMLElement>('.slides').style.display = 'none';
+    document.querySelector<HTMLElement>('.keyLink').style.display = 'none';
+    document.querySelector<HTMLElement>('.keyLabel').style.display = 'none';
+    document.querySelector<HTMLElement>('.noResults').style.display = '';
+  };
+
   // This function returns true if the form input is valid
-  const validateForm = () => {
+  const validateForm = async () => {
     // Checks if the input number is between 1-50 as required by the API
     if (
       Number(document.querySelector('input').value) >= 1 &&
       Number(document.querySelector('input').value) <= 50
     ) {
-      return true;
+      if (
+        (await fetch(apiUrl)
+          .then((response) => response.json())
+          .then((responseData) => responseData.response_code)) != 1
+      ) {
+        return true;
+      } else {
+        noResults();
+        return false;
+      }
     } else {
       document.querySelector('input').scrollIntoView();
       return false;
@@ -236,8 +252,10 @@ const Home = () => {
   };
 
   // Handles click of the "Generate" button
-  const generateHandle = (event) => {
-    if (validateForm()) {
+  const generateHandle = async (event) => {
+    let validation = await validateForm();
+    if (validation) {
+      document.querySelector<HTMLElement>('.noResults').style.display = 'none';
       document.querySelector<HTMLElement>('.slides').style.opacity = '0.85';
       setTimeout(() => {
         slideIndex = 0;
@@ -379,6 +397,14 @@ const Home = () => {
               fullscreen
             </span>
           </p>
+        </section>
+
+        <section className="noResults" style={{ display: 'none' }}>
+          <br />
+          <p style={{ color: 'red' }}>
+            Failed! Not enough questions to fulfill parameters.
+          </p>
+          <p>Please modify your parameters and try again.</p>
         </section>
 
         <section className="answerKey">
