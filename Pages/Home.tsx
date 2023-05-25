@@ -204,6 +204,10 @@ const Home = () => {
             </div>
           );
         });
+
+        // Logs the slide data generated from the API for debugging
+        //console.log(responseData.results)
+
         // Add answer key to database with id 1 greater than the highest key (previous id)
         let newId = Math.max(...keys.map((x) => x.id)) + 1;
         keysRef.add({
