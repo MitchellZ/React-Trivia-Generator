@@ -22,7 +22,7 @@ To see the React Trivia Generator in action, you can visit the following link: [
 
 1. **Select Parameters**: Choose the category and difficulty level for your trivia quiz.
 
-2. **Generate Slides**: Click on the "Generate Slides" button to create a slide deck with the selected parameters.
+2. **Generate Slides**: Click on the "Generate" button to create a slide deck with the selected parameters.
 
 3. **Host Trivia**: Project the generated slides on a screen for participants to see. As the host, you can access the answer key to facilitate a smooth trivia experience.
 
