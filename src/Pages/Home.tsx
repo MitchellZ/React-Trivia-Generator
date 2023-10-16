@@ -218,7 +218,7 @@ const Home = () => {
 
         // Update the link to the answer key page with the new ID
         setAnswerKeyLink(
-          'https://react-trivia-generator.stackblitz.io/Answers?id=' + newId
+          'https://react-trivia-generator.netlify.app/Answers?id=' + newId
         );
 
         // Set the state to display the newly retrieved data
