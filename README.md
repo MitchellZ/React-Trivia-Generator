@@ -4,7 +4,7 @@ Welcome to the React Trivia Generator! This application allows you to create eng
 
 ## Getting Started
 
-To see the React Trivia Generator in action, you can visit the following link: [React Trivia Generator Demo](https://react-trivia-generator.stackblitz.io). This demo provides a quick overview of how the application functions and showcases its features.
+To see the React Trivia Generator in action, you can visit the following link: [React Trivia Generator Demo](https://react-trivia-generator.netlify.app). This demo provides a quick overview of how the application functions and showcases its features.
 
 ## Features
 
