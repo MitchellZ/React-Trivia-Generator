@@ -1,3 +1,35 @@
+/* Colors for Light Mode */
+:root {
+  --background-color: white;
+  --nav-background-color: #f1f1f1;
+  --nav-text-color: dimgray;
+  --nav-hover-color: #cccccc;
+  --form-item-accent-color: #0fb3eb;
+  --form-background-color: #dff5fd;
+  --form-p-color: #0d6583;
+  --copy-button-hover: #0d8fbb;
+  --red: red;
+  --green: green;
+  --text-color: black;
+}
+
+/* Colors for Dark Mode */
+body.dark-mode {
+  --background-color: #1c1c1c;
+    background-color: var(--background-color);
+    color: white;
+  --nav-background-color: #2a2a2a;
+  --nav-text-color: #cccccc;
+  --nav-hover-color: dimgray;
+  --form-item-accent-color: #0b779b;
+  --form-background-color: #2a2a2a;
+  --form-p-color: #2fbceb;
+  --copy-button-hover: #097396;
+  --red: rgb(252, 75, 75);
+  --green: rgb(82, 255, 82);
+  --text-color: white;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,6 +52,10 @@ p {
   font-family: Lato;
 }
 
+a {
+  color: var(--form-item-accent-color);
+}
+
 .nav {
   font-family: Lato;
   z-index: 2;
@@ -27,7 +63,7 @@ p {
   top: 0;
   height: 66px;
   width: 100%;
-  background-color: #f1f1f1;
+  background-color: var(--nav-background-color);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -36,7 +72,7 @@ p {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: var(--nav-background-color);
 }
 
 .nav li {
@@ -45,18 +81,18 @@ p {
 
 .nav li a {
   display: block;
-  color: dimgray;
+  color: var(--nav-text-color);
   text-align: center;
   padding: 24px 24px;
   text-decoration: none;
 }
 
 .nav li a:hover:not(.active) {
-  background-color: #cccccc;
+  background-color: var(--nav-hover-color);
 }
 
 .nav .active {
-  color: black;
+  color: var(--text-color);
 }
 
 .nav .about {
@@ -96,29 +132,31 @@ p {
     margin-right: auto;
     margin-bottom: 28px;
     width: 500px;
-    background-color: #dff5fd;
+    background-color: var(--form-background-color);
     box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
   }
 
   .parameters_form select {
     padding: 10px;
     width: 45%;
-    background-color: white;
-    border: 3px solid #0fb3eb;
+    background-color: var(--background-color);
+    border: 3px solid var(--form-item-accent-color);
     border-radius: 10px;
+    color: var(--text-color);
   }
 
   .parameters_form input {
     box-sizing: border-box;
     padding: 10px;
     width: 45%;
-    background-color: white;
-    border: 3px solid #0fb3eb;
+    background-color: var(--background-color);
+    border: 3px solid var(--form-item-accent-color);
     border-radius: 10px;
+    color: var(--text-color);
   }
 
   .parameters_form input.invalid{
-    border: 3px solid red;
+    border: 3px solid var(--red);
   }
 
   .input_item{
@@ -134,29 +172,31 @@ p {
     border-radius: 18px;
     margin-left: 15px;
     margin-right: 15px;
-    background-color: #dff5fd;
+    background-color: var(--form-background-color);
     box-shadow: 0px 3px 10px -2px rgba(0, 0, 0, 0.2);
   }
 
   .parameters_form select {
     padding: 10px;
     width: 65%;
-    background-color: white;
-    border: 3px solid #0fb3eb;
+    background-color: var(--background-color);
+    border: 3px solid var(--form-item-accent-color);
     border-radius: 10px;
+    color: var(--text-color);
   }
 
   .parameters_form input {
     box-sizing: border-box;
     padding: 10px;
     width: 65%;
-    background-color: white;
-    border: 3px solid #0fb3eb;
+    background-color: var(--background-color);
+    border: 3px solid var(--form-item-accent-color);
     border-radius: 10px;
+    color: var(--text-color);
   }
 
   .parameters_form input.invalid{
-    border: 3px solid red;
+    border: 3px solid var(--red);
   }
 
   .input_item{
@@ -166,22 +206,22 @@ p {
 }
 
 .parameters_form select:hover {
-  background-color: #cccccc;
+  background-color: var(--nav-hover-color);
 }
 
 .parameters_form input:hover {
-  background-color: #cccccc;
+  background-color: var(--nav-hover-color);
 }
 
 .parameters_form p {
   font-size: larger;
   font-weight: bold;
-  color: #0d6583;
+  color: var(--form-p-color);
 }
 
 label {
   font-family: Lato;
-  color: #0fb3eb;
+  color: var(--form-item-accent-color);
 }
 
 .parameters_form button {
@@ -191,18 +231,18 @@ label {
   margin-left: auto;
   margin-right: auto;
   width: 45%;
-  background-color: #0fb3eb;
+  background-color: var(--form-item-accent-color);
   color: white;
-  border: 3px solid #0fb3eb;
+  border: 3px solid var(--form-item-accent-color);
   border-radius: 10px;
   font-family: Lato;
   font-weight: bold;
 }
 
 .parameters_form button:hover {
-  background-color: #0d8fbb;
+  background-color: var(--copy-button-hover);
   color: white;
-  border: 3px solid #0d8fbb;
+  border: 3px solid var(--copy-button-hover);
 }
 
 input {
@@ -218,7 +258,7 @@ select:focus{
 }
 
 #form_error{
-  color: red;
+  color: var(--red);
   font-style: italic;
   font-weight: normal;
   font-size: 11pt;
@@ -242,8 +282,8 @@ footer {
   margin-top: -50px;
   clear: both;
   text-align: center;
-  color: dimgray;
-  background-color: #f8f8f8;
+  color: var(--nav-text-color);
+  background-color: var(--nav-background-color);
 }
 
 footer li {
@@ -293,7 +333,7 @@ footer li {
     margin-top: 8px;
     margin-bottom: 24px;
     width: 380px;
-    border: 3px solid #0fb3eb;
+    border: 3px solid var(--form-item-accent-color);
     border-radius: 10px;
   }
 }
@@ -344,7 +384,7 @@ footer li {
     margin-top: 8px;
     margin-bottom: 24px;
     width: 100%;
-    border: 3px solid #0fb3eb;
+    border: 3px solid var(--form-item-accent-color);
     border-radius: 10px;
   }
 }
@@ -401,6 +441,8 @@ footer li {
   border-radius: 10px;
   width: calc(100% - 64px);
   outline: none;
+  color: var(--text-color);
+  background-color: var(--background-color);
 }
 
 .keyLink input:hover {
@@ -408,7 +450,7 @@ footer li {
 }
 
 #copyButton {
-  background-color: #0fb3eb;
+  background-color: var(--form-item-accent-color);
   width: 42px;
   height: 36px;
   float: right;
@@ -419,7 +461,7 @@ footer li {
 }
 
 #copyButton:hover {
-  background-color: #0d8fbb;
+  background-color: var(--copy-button-hover);
   cursor: pointer;
 }
 
@@ -447,9 +489,9 @@ footer li {
 }
 
 .correct{
-  color: green;
+  color: var(--green);
 }
 
 .incorrect{
-  color: red;
+  color: var(--red);
 }
