@@ -18,6 +18,8 @@ To see the React Trivia Generator in action, you can visit the following link: [
 
 - **Routing and Form Validation**: The application incorporates routing for better navigation between different sections. Furthermore, basic form validation is in place to ensure that API calls meet the necessary requirements, enhancing the overall reliability of the application.
 
+- **Dark Mode**: This application supports dark mode, it seamlessly adjusts its appearance based on the user's system preference. If the user has enabled dark mode in their operating system, the application interface will automatically switch to a dark color scheme, providing a visually comfortable experience in low-light environments.
+
 ## Usage
 
 1. **Select Parameters**: Choose the category and difficulty level for your trivia quiz.
