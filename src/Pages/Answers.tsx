@@ -34,29 +34,26 @@ const Answers = () => {
 
   // Firestore variables
   const keysRef = firestore.collection('keys');
-  const keys = [];
+  const [keys, setKeys] = useState<any[]>([]);
 
-  // Listen for changes in the 'keys' collection
-  keysRef.onSnapshot((querySnapshot) => {
-    // Clear the existing keys array
-    keys.length = 0;
-
-    // Iterate over each document in the collection
-    querySnapshot.forEach((doc) => {
-      // Push the data of each document into the 'keys' array
-      keys.push(doc.data());
+  useEffect(() => {
+    // Fetch the keys data once
+    keysRef.get().then((querySnapshot) => {
+      const keysData = querySnapshot.docs.map((doc) => doc.data());
+      setKeys(keysData);
     });
-  });
+  }, []);
 
   useEffect(() => {
     //Runs on every render, gets answers to display
-    if (keys != null) {
+    if (keys != null && keys.length > 0) {
       getAnswers();
     }
   }, [keys]);
 
   // Gets sets answers to answers from Firestore or indicates invalid ID
   function getAnswers() {
+    console.log('Keys: ', keys)
     const answerKey = keys.find((x) => x.id === id);
 
     // Check if the answer key exists for the given session ID
