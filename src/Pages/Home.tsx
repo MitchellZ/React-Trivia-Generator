@@ -181,13 +181,24 @@ const Home = () => {
       '&encode=url3986';
   };
 
-  // Firestore variables
-  const keysRef = firestore.collection('keys');
-  const query = keysRef;
-  
-  // @ts-ignore
-  const [keys] = useCollectionData(query);
+   // Firestore variables
+   const keysRef = firestore.collection('keys');
+   const keys = [];
+ 
+   // Listen for changes in the 'keys' collection
+   keysRef.onSnapshot((querySnapshot) => {
+     // Clear the existing keys array
+     keys.length = 0;
+ 
+     // Iterate over each document in the collection
+     querySnapshot.forEach((doc) => {
+       // Push the data of each document into the 'keys' array
+       keys.push(doc.data());
+     });
+   });
 
+   console.log("keys:", keys);
+   
   // This function uses the OpenTriviaDatabase API to generate trivia slides
   const pullJson = (event) => {
     event.preventDefault();

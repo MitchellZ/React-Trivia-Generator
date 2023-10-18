@@ -32,11 +32,21 @@ const Answers = () => {
 
   const [answers, setAnswers] = useState<any | null>(null);
 
+  // Firestore variables
   const keysRef = firestore.collection('keys');
-  const query = keysRef;
+  const keys = [];
 
-  // @ts-ignore
-  const [keys] = useCollectionData(query);
+  // Listen for changes in the 'keys' collection
+  keysRef.onSnapshot((querySnapshot) => {
+    // Clear the existing keys array
+    keys.length = 0;
+
+    // Iterate over each document in the collection
+    querySnapshot.forEach((doc) => {
+      // Push the data of each document into the 'keys' array
+      keys.push(doc.data());
+    });
+  });
 
   useEffect(() => {
     //Runs on every render, gets answers to display
