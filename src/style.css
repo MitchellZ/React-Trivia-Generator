@@ -106,7 +106,7 @@ a {
 }
 
 .welcome {
-  padding: 128px 24px 28px 24px;
+  padding: 128px 24px 54px 24px;
   text-align: center;
   display: block;
   margin-left: auto;
@@ -292,7 +292,28 @@ footer li {
   padding: 16px;
 }
 
+/* Desktop CSS */
 @media only screen and (min-width: 598px) {
+  /* Styles for the grid */
+  .main_body {
+    overflow: auto;
+    min-height: 100vh;
+    margin-bottom: -50px;
+    display: flex;
+    flex-wrap: wrap; /* Allow flex items to wrap to the next line */
+    justify-content: center; /* Align flex items to the start of the flex container */ 
+  }
+  
+  .form_grid_item {
+    width: 600px;
+  }
+
+  .slides_grid_item {
+    width: 600px;
+    padding-top: 16vh;
+    padding-bottom: 16vh;
+  }
+
   .slide {
     margin-left: 6%;
     margin-right: 6%;
@@ -311,6 +332,20 @@ footer li {
     width: 500px;
     aspect-ratio: 16/9;
     background-color: black;
+  }
+
+  .slides_placeholder {
+    display: flex;
+    place-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 28px;
+    width: 500px;
+    aspect-ratio: 16/9;
+    background-color: #404040;
   }
 
   #slideText {
@@ -338,6 +373,7 @@ footer li {
   }
 }
 
+/* Mobile CSS */
 @media only screen and (max-width: 598px) {
   .slide {
     margin-left: 6%;
@@ -357,6 +393,10 @@ footer li {
     width: auto;
     aspect-ratio: 16/9;
     background-color: black;
+  }
+
+  .slides_placeholder {
+    display: none;
   }
 
   #slideText {
