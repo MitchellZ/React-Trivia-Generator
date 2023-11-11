@@ -304,13 +304,13 @@ footer li {
     justify-content: center; /* Align flex items to the start of the flex container */ 
   }
   
-  .form_grid_item {
+  .form_flex_item {
     width: 600px;
   }
 
-  .slides_grid_item {
+  .slides_flex_item {
     width: 600px;
-    padding-top: 16vh;
+    padding-top: 124px;
     padding-bottom: 16vh;
   }
 
@@ -329,7 +329,7 @@ footer li {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 28px;
-    width: 500px;
+    width: calc(100% - 20px);
     aspect-ratio: 16/9;
     background-color: black;
   }
@@ -343,9 +343,13 @@ footer li {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 28px;
-    width: 500px;
+    width: calc(100% - 20px);
     aspect-ratio: 16/9;
     background-color: #404040;
+  }
+
+  .slides_placeholder p {
+    color: white;
   }
 
   #slideText {

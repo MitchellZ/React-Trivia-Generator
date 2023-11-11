@@ -324,7 +324,7 @@ const Home = () => {
         <h1>Welcome to Trivia Generator!</h1>
       </div>
       <div className="main_body">
-        <div className="form_grid_item">
+        <div className="form_flex_item">
           <section className="parameters_form">
             <p>Enter your parameters below</p>
             <br />
@@ -402,7 +402,7 @@ const Home = () => {
           </section>
           <br />
         </div>
-        <div className="slides_grid_item">
+        <div className="slides_flex_item">
           <section className="slides_placeholder">
             <p style={{ WebkitUserSelect: 'none' }}>Generated slides will appear here.</p>
           </section>
