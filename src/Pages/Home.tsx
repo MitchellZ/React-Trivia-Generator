@@ -282,7 +282,8 @@ const Home = () => {
         document.querySelector<HTMLElement>('.slides_placeholder').style.display = 'none';
         document.querySelector<HTMLElement>('.keyLink').style.display = '';
         document.querySelector<HTMLElement>('.keyLabel').style.display = '';
-      }, 50);
+        // Increase wait time to avoid rate limiting
+      }, 5500);
     }
   };
 
